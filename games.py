@@ -2,8 +2,17 @@ import random
 
 money = 100
 #Write your game of chance functions here
+def init_game() : 
+    print("-------------------------------------------")
+    print("Welcome to the Casino!")
+    global money
+    print("You have " + str(money) + " dollars to do with as you wish!")
+    print("-------------------------------------------")
+    game_choice = get_game()
+    determine_game(game_choice)
+
 def get_game() :
-    print("Please select what game you'd like to play : CoinFlip, Cho-Han, Cards, Roulette")
+    print("Please select what game you'd like to play : Coin Flip, Cho-Han, Cards, Roulette")
     return input()
 
 def get_coin_flip(bet, call) : 
@@ -88,8 +97,7 @@ def get_roulette_spin(bet, call, call_type) :
             bet = -bet
             print("You lost : " + str(bet) + " dollars! Sorry!")
             return bet
-    return
-   
+
 def run_game_coinflip():
     global money
     print("How much would you like to bet?")
@@ -102,10 +110,10 @@ def run_game_coinflip():
         else:
             call = 0
         money += get_coin_flip(bet, call)
-        print("You now have " + str(money) + " dollars to bet")
     else : 
         print("The bet amount is invalid, please try again")
         return
+    init_game()
 
 def run_game_cho_han():
     global money
@@ -119,10 +127,10 @@ def run_game_cho_han():
         else:
             call = False
         money += get_dice_roll(bet, call)
-        print("You now have " + str(money) + " dollars to bet")
     else : 
         print("The bet amount is invalid, please try again")
         return
+    init_game()
 
 def run_game_cards() : 
     global money
@@ -130,9 +138,9 @@ def run_game_cards() :
     bet = int(input())
     if (bet >= 0 ) and (bet <= money) : 
         money += get_card_pick(bet)
-        print("You now have " + str(money) + " dollars to bet")
     else : 
         print("The bet amount is invalid, please try again")
+    init_game()
 
 def run_game_roulette() :
     global money
@@ -148,11 +156,11 @@ def run_game_roulette() :
             print("What do you think it'll be, Odd or Even?")
             call = input()
         money += get_roulette_spin(bet, call, call_type)
-        print("You now have " + str(money) + " dollars to bet")
         return;
     else : 
         print("The bet amount is invalid, please try again")
         return;
+    init_game()
 
 def determine_game(game_choice) : 
     if (game_choice == "CoinFlip") or (game_choice == "coin flip") or (game_choice == "Coin flip") or (game_choice == "Coin Flip") or (game_choice == "coinflip"):
@@ -172,7 +180,5 @@ def determine_game(game_choice) :
 
 
 #Call your game of chance functions here
-game_choice = get_game()
-determine_game(game_choice)
-
+init_game()
 
